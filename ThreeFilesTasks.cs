@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,64 +14,31 @@ namespace otusParallelGlazev
         {
             Stopwatch stopwatch = new Stopwatch();
 
-            var path = Environment.CurrentDirectory + "/ThreeFiles/first.txt";
-            var text = File.ReadAllText(path);
-            int count = 0;
+            List<string> paths = new List<string>(){
+                 Environment.CurrentDirectory + "/ThreeFiles/first.txt",
+                 Environment.CurrentDirectory + "/ThreeFiles/second.txt",
+                 Environment.CurrentDirectory + "/ThreeFiles/third.txt",
+                };
 
-            stopwatch.Start();
-
-            foreach (var item in text)
+            for (int i = 0; i < paths.Count; i++)
             {
-                if (item == ' ')
+                var text = File.ReadAllText(paths[i]);
+                int count = 0;
+
+                stopwatch.Start();
+
+                foreach (var item in text)
                 {
-                    count++;
+                    if (item == ' ')
+                    {
+                        count++;
+                    }
                 }
+
+                stopwatch.Stop();
+
+                Console.WriteLine($"{paths[i]} file = {count} spaces. Time = {stopwatch.Elapsed}");
             }
-
-            stopwatch.Stop();
-
-            Console.WriteLine($"first file = {count} spaces. Time = {stopwatch.Elapsed}");
-        }
-        public static void ParseFile2()
-        {
-            Stopwatch stopwatch = new Stopwatch();
-
-            var path = Environment.CurrentDirectory + "/ThreeFiles/second.txt";
-            var text = File.ReadAllText(path);
-            int count = 0;
-
-            stopwatch.Start();
-            
-            foreach (var item in text)
-            {
-                if (item == ' ')
-                {
-                    count++;
-                }
-            }
-            stopwatch.Stop();
-            Console.WriteLine($"second file = {count} spaces. Time = {stopwatch.Elapsed}");
-
-        }
-        public static void ParseFile3()
-        {
-            Stopwatch stopwatch = new Stopwatch();
-
-            var path = Environment.CurrentDirectory + "/ThreeFiles/third.txt";
-            var text = File.ReadAllText(path);
-            int count = 0;
-
-            stopwatch.Start();
-
-            foreach (var item in text)
-            {
-                if (item == ' ')
-                {
-                    count++;
-                }
-            }
-            stopwatch.Stop();
-            Console.WriteLine($"third file = {count} spaces. Time = {stopwatch.Elapsed}");
         }
     }
 }

@@ -9,22 +9,21 @@ namespace otusParallelGlazev
         {
             Console.WriteLine("Hello, World!");
 
-           // ThreeFileTask();
-            CustomPathTask();
+            ThreeFileTask();
+            //CustomPathTask();
         }
         static void ThreeFileTask()
         {
             Stopwatch sw = Stopwatch.StartNew();
 
             _tasks.Add(Task.Run(()=> ThreeFilesTasks.ParseFile1()));
-            _tasks.Add(Task.Run(() => ThreeFilesTasks.ParseFile2()));
-            _tasks.Add(Task.Run(() => ThreeFilesTasks.ParseFile3()));
 
             Task.WaitAll(_tasks.ToArray());
 
             sw.Stop();
             Console.WriteLine($"END THREE FILES SPACES. TIME = {sw.Elapsed}");
         }
+
         static void CustomPathTask()
         {
             Stopwatch sw = Stopwatch.StartNew();
@@ -32,9 +31,8 @@ namespace otusParallelGlazev
             CustomPathTasks.Start("ThreeFiles");
 
             sw.Stop();
+
             Console.WriteLine($"END CUSOM PATH FILES SPACES. TIME = {sw.Elapsed}");
         }
-
-
     }
 }
